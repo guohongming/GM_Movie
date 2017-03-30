@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>{{item.name}}</title>
+    <link rel="shortcut icon" href="{{url_for('static',filename = 'image/logo.ico')}}" type="image/x-icon">
+    <link rel="icon" href="{{url_for('static',filename = 'image/logo.ico')}}" type="image/x-icon">
+    <!-- Bootstrap -->
+    <link href="{{url_for('static',filename = 'css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand" href="#">谷米电影</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">电影 <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">电影</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+
+<div class="container">
+    <ul class="nav nav-pills">
+        <li role="presentation" class="active"><a href="#">{{item.name}}</a></li>
+
+    </ul>
+
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-xs-6 col-md-4">
+                <a href="#" class="thumbnail">
+                    <img src="{{item.img_url}}" alt="...">
+                </a>
+            </div>
+            <div class="col-xs-6 col-md-3">
+                <div class="container">
+                    <span class="label label-default">片名</span>：
+                    <span> {{item.name}}</span>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <span class="label label-primary">导演</span>：
+                    <span> {{item.director}}</span>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <span class="label label-success">编剧</span>：
+                    <span> {{item.screenwriter}}</span>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+
+                    <span class="label label-info" >主演</span>
+                    {% for star in itemstarsto5 %}
+                        <span>{{ star }}</span>|
+                    {% endfor  %}
+
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <span class="label label-warning">类型</span>：
+                    <span> {{item.types}}</span>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <span class="label label-danger">语言</span>：
+                    <span> {{item.language}}</span>
+
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-4">
+                <div class="container">
+                    <span class="label label-default">上映</span>：
+                    <span> {{item.release_time}}</span>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <span class="label label-primary">片长</span>：
+                    <span> {{item.duration}}</span>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <span class="label label-success">又名</span>：
+                    <span> {{item.alternate_name}}</span>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <span class="label label-info">IMDB</span>：
+                    <span> {{item.imdb_url}}</span>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <span class="label label-warning">评分</span>：
+                    <span> {{item.score}}</span>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <span class="label label-danger">年份</span>：
+                    <span> {{item.issue_year}}</span>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <button type="button" class="btn btn-success" ><a href="https://movie.douban.com/subject/{{ item.id }}/">豆瓣链接</a></button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" class="btn btn-success"><a href="{{ item.imdb_url }}">IMDB链接</a></button>
+        </p>
+
+
+
+    </div>
+    <div class="footer">
+
+        <div class="container">
+            <p class="text-center">Copyright &copy; 2017 balnk guo.</p>
+            <p class="text-right"><a href="#top">回到顶部</a></p>
+
+        </div>
+    </div>
+    </div>
+
+   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{ url_for('static',filename = 'js/bootstrap.min.js') }}"></script>
+  </body>
+</html>
