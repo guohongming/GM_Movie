@@ -142,7 +142,7 @@ class SelectData(object):
         score = score_bs.find('strong',{'class':'ll rating_num'}).get_text()
         # print(score)
 
-        result.extend((self.__id,title_name,title_year,pic_url,directer_name,maker_name,act_names,kinds_name,area_name,language,release_date,runtime,other_name,imdb_url,score))
+        result.extend((self.__id, title_name, title_year, pic_url,directer_name,maker_name,act_names,kinds_name,area_name,language,release_date,runtime,other_name,imdb_url,score))
         return result
 
 

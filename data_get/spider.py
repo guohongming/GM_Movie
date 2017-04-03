@@ -1,11 +1,10 @@
-__author__ = 'Guo'
+__author__ = 'Blank Guo'
 
 # coding: utf-8
 
-import requests
+
 import random
 import requests
-from bs4 import BeautifulSoup
 import time
 import re
 

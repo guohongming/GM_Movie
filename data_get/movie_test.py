@@ -1,11 +1,13 @@
-__author__ = 'Guo'
+__author__ = 'Blank Guo'
 
 from spider import Spider
 from select_data import SelectData
 import csv
 
+
 def get_urls():
     return
+
 
 def write_file(filename,data):
     with open(filename, 'a', errors='ignore', newline='') as f:
@@ -14,10 +16,10 @@ def write_file(filename,data):
 
 
 def main():
-    for i in range(37,100):
+    for i in range(0, 100):
         print('正在抓取第',i+1,'页...')
-        url= 'https://movie.douban.com/tag/%E7%88%B1%E6%83%85?start='+str(i*20)+'&type=T'
-    # url= 'https://movie.douban.com/tag/%E7%88%B1%E6%83%85?start=0&type=T'
+        url= 'https://movie.douban.com/tag/%E5%96%9C%E5%89%A7?start='+str(i*20)+'&type=T'
+        # https://movie.douban.com/tag/%E5%96%9C%E5%89%A7?start=20&type=T
         spider_1 = Spider()
         html,id = spider_1.get_html_from(url)           # 获取链接
         select_1 = SelectData(html)
@@ -29,14 +31,16 @@ def main():
             select_data_a = SelectData(html_a,id_a)
             try:
                 result = select_data_a.select_content()
+
             except:
                 result = []
             # print(type(result))
             # print(result)
-            if result!= []:
+            if result != []:
                 print('success',count)
-            write_file('movie_aiqing.csv',result)
+            write_file('movie_xiju.csv',result)
             count +=1
+
 
 if __name__ == '__main__':
     main()

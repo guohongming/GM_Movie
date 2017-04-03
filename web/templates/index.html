@@ -33,7 +33,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="#">谷米电影</a>
+            <a class="navbar-brand" href="/">谷米电影</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -41,55 +41,50 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">首页 <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="/">首页 <span class="sr-only">(current)</span></a></li>
                 <li><a href="#">电影</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">分类 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">爱情 Love</a></li>
+                        <li><a href="/tag/爱情?skip=0&limit=10">爱情 Love</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">喜剧 Comedy</a></li>
+                        <li><a href="/tag/喜剧?skip=0&limit=10">喜剧 Comedy</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">剧情 Plot</a></li>
+                        <li><a href="/tag/剧情?skip=0&limit=10">剧情 Plot</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">动画 Animation</a></li>
+                        <li><a href="/tag/动画?skip=0&limit=10">动画 Animation</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">科幻 Science</a></li>
+                        <li><a href="/tag/科幻?skip=0&limit=10">科幻 Science</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">动作 Action</a></li>
+                        <li><a href="/tag/动作?skip=0&limit=10">动作 Action</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">经典 Classic</a></li>
+                        <li><a href="/tag/经典?skip=0&limit=10">经典 Classic</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">悬疑 Suspense</a></li>
+                        <li><a href="/tag/悬疑?skip=0&limit=10">悬疑 Suspense</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">青春 Youth</a></li>
+                        <li><a href="/tag/青春?skip=0&limit=10">青春 Youth</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">惊悚 Thriller</a></li>
+                        <li><a href="/tag/惊悚?skip=0&limit=10">惊悚 Thriller</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">感人 Moving</a></li>
+                        <li><a href="/tag/感人?skip=0&limit=10">感人 Moving</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">其他 Other</a></li>
                     </ul>
                 </li>
             </ul>
-            <form class="navbar-form navbar-left">
+
+
+            <form class="navbar-form navbar-left" method="post" action="/search">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input id = "data" name ="data" type="text" class="form-control" placeholder="Search">
                 </div>
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
+
+
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Link</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </li>
+                <li><a href="#">登录</a></li>
+                <li><a href="#">注册</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -100,8 +95,8 @@
 
     <ul class="nav nav-pills">
         <li role="presentation" class="active"><a href="#">{{ key }}</a></li>
-        <li role="presentation"><a href="#"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></li>
-        <li role="presentation"><a href="#">更多</a></li>
+        <li role="presentation"><a href="/tag/{{ key }}?skip=0&limit=10"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></li>
+        <li role="presentation"><a href="/tag/{{ key }}?skip=0&limit=10">更多</a></li>
     </ul>
 
 
@@ -113,7 +108,7 @@
                     <img src="{{data_movies_6[key][0]['img_url']}}" class="img-responsive" alt="Responsive image">
                 </a>
                 <div class="caption">
-                    <h3>{{ data_movies_6[key][0].name}}</h3>
+                    <h4>{{ data_movies_6[key][0].name | truncate(10, True)}}</h4>
                     <p><a href="./subject/{{data_movies_6[key][0].id }}" class="btn btn-primary" role="button">详情</a>
                         &nbsp; &nbsp; &nbsp; &nbsp;
                         <a href="./subject/{{data_movies_6[key][0].id }}" class="btn btn-default" role="button">
@@ -131,7 +126,7 @@
                     <img src="{{data_movies_6[key][1]['img_url']}}" class="img-responsive" alt="Responsive image">
                 </a>
                 <div class="caption">
-                    <h3>{{ data_movies_6[key][1].name}}</h3>
+                    <h4>{{ data_movies_6[key][1].name | truncate(10, True)}}</h4>
                     <p><a href="./subject/{{data_movies_6[key][1].id }}" class="btn btn-primary" role="button">详情</a>
                         &nbsp; &nbsp; &nbsp; &nbsp;
                         <a href="./subject/{{data_movies_6[key][1].id }}" class="btn btn-default" role="button">
@@ -149,7 +144,7 @@
                     <img src="{{data_movies_6[key][2]['img_url']}}" class="img-responsive" alt="Responsive image">
                 </a>
                 <div class="caption">
-                    <h3>{{ data_movies_6[key][2].name}}</h3>
+                    <h4>{{ data_movies_6[key][2].name | truncate(10, True)}}</h4>
                     <p><a href="./subject/{{data_movies_6[key][2].id }}" class="btn btn-primary" role="button">详情</a>
                         &nbsp; &nbsp; &nbsp; &nbsp;
                         <a href="./subject/{{data_movies_6[key][2].id }}" class="btn btn-default" role="button">
@@ -167,7 +162,7 @@
                     <img src="{{data_movies_6[key][3]['img_url']}}" class="img-responsive" alt="Responsive image">
                 </a>
                 <div class="caption">
-                    <h3>{{ data_movies_6[key][3].name}}</h3>
+                    <h4>{{ data_movies_6[key][3].name | truncate(10, True)}}</h4>
                     <p><a href="./subject/{{data_movies_6[key][3].id }}" class="btn btn-primary" role="button">详情</a>
                         &nbsp; &nbsp; &nbsp; &nbsp;
                         <a href="./subject/{{data_movies_6[key][3].id }}" class="btn btn-default" role="button">
@@ -185,7 +180,7 @@
                     <img src="{{data_movies_6[key][4]['img_url']}}" class="img-responsive" alt="Responsive image">
                 </a>
                 <div class="caption">
-                    <h3>{{ data_movies_6[key][4].name}}</h3>
+                    <h4>{{ data_movies_6[key][4].name | truncate(10, True)}}</h4>
                     <p><a href="./subject/{{data_movies_6[key][4].id }}" class="btn btn-primary" role="button">详情</a>
                         &nbsp; &nbsp; &nbsp; &nbsp;
                         <a href="./subject/{{data_movies_6[key][4].id }}" class="btn btn-default" role="button">
@@ -203,7 +198,7 @@
                     <img src="{{data_movies_6[key][5]['img_url']}}" class="img-responsive" alt="Responsive image">
                 </a>
                 <div class="caption">
-                    <h3>{{ data_movies_6[key][5].name}}</h3>
+                    <h4>{{ data_movies_6[key][5].name | truncate(10, True)}}</h4>
                     <p><a href="./subject/{{data_movies_6[key][5].id }}" class="btn btn-primary" role="button">详情</a>
                         &nbsp; &nbsp; &nbsp; &nbsp;
                         <a href="./subject/{{data_movies_6[key][5].id }}" class="btn btn-default" role="button">
@@ -218,18 +213,55 @@
     </div>
 {%endfor%}
 
-
-
-
 </div>
-<div class="footer">
-
+<hr/>
+<footer class="footer ">
     <div class="container">
-        <p class="text-center">Copyright &copy; 2017 balnk guo.</p>
-        <p class="text-right"><a href="#top">回到顶部</a></p>
+        <div class="row footer-top">
+
+            <div class="col-sm-6 col-md-4 ">
+
+
+                <h4>关于</h4>
+                <ul class="list-unstyled">
+                    <li><a href="#">关于我们</a></li>
+
+                </ul>
+            </div>
+
+            <div class="col-sm-6 col-md-4 ">
+                <h4>联系方式</h4>
+                <ul class="list-unstyled">
+                    <li><a href="http://weibo.com/" title="blank_guo weibo" target="_blank">新浪微博</a></li>
+                    <li><a href="1006575211@qq.com">电子邮件</a></li>
+                </ul>
+            </div>
+
+            <div class="col-sm-6 col-md-4 ">
+                <h4>友情链接</h4>
+                <ul class="list-unstyled">
+                    <li><a href="http://www.bootcss.com/" target="_blank">bootstrap</a></li>
+                    <li><a href="https://movie.douban.com/" target="_blank">豆瓣电影</a></li>
+                    <li><a href="http://glyphicons.com/" target="_blank">glyphicons</a></li>
+                    <li><a href="http://www.imdb.com/" target="_blank">IMDB</a></li>
+                </ul>
+            </div>
+
+        </div>
 
     </div>
-</div>
+
+    <hr/>
+    <div class="row footer-bottom">
+        <div class="container">
+            <p class="text-center">Copyright &copy; 2017 balnk guo.</p>
+            <p class="text-right"><a href="#top">回到顶部</a></p>
+
+        </div>
+    </div>
+    </div>
+</footer>
+
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
