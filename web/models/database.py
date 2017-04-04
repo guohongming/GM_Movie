@@ -39,6 +39,7 @@ class DataBase(object):
         data['惊悚'] = info6s_from_db_thriller
         data['感人'] = info6s_from_db_moving
         key = ['爱情', '喜剧', '剧情', '动画', '科幻', '动作', '经典', '悬疑', '青春', '惊悚', '感人']
+
         return data, key
 
     #  根据id 查询信息,返回一条记录的数据 和 主演的前8
@@ -75,6 +76,14 @@ class DataBase(object):
             return True
 
         return False
+
+    def check_pass(self, name, password):
+        a_password = self.movie_db.userinfo.find_one({'name': name})
+        if a_password == password:
+            return True
+        else:
+            return False
+
 
     def test(self):
 

@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request
-from models import database
+from models import database, myjinjafilter
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'my name is blank guo'
+app.jinja_env.filters['make_name_to_one'] = myjinjafilter.make_name_to_one
 db = database.DataBase()
 
 

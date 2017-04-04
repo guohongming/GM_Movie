@@ -10,6 +10,19 @@
     <link rel="icon" href="static/image/logo.ico" type="image/x-icon">
     <!-- Bootstrap -->
     <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        .single-row {
+            width:200px;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+        }
+        .box_relative {
+          position: relative;
+
+          bottom: 5px;
+        }
+    </style>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,7 +54,7 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">首页 <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="/"><span class="glyphicon glyphicon-home "></span>首页 <span class="sr-only">(current)</span></a></li>
                 <li><a href="#">电影</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">分类 <span class="caret"></span></a>
@@ -102,13 +115,14 @@
 
     <div class="row">
 
-        <div class="col-sm-4 col-md-2">
-            <div class="thumbnail">
+        <div class="col-sm-4 col-md-2" >
+            <div class="thumbnail" style="height:330px;">
                 <a href="./subject/{{data_movies_6[key][0].id }}">
-                    <img src="{{data_movies_6[key][0]['img_url']}}" class="img-responsive" alt="Responsive image">
+                    <img src="{{data_movies_6[key][0]['img_url']}} " class="img-responsive" alt="Responsive image" style="height:233px;">
                 </a>
-                <div class="caption">
-                    <h4>{{ data_movies_6[key][0].name | truncate(10, True)}}</h4>
+                <div class="caption" >
+
+                    <h4 class = "single-row">{{ data_movies_6[key][0].name | make_name_to_one }}</h4>
                     <p><a href="./subject/{{data_movies_6[key][0].id }}" class="btn btn-primary" role="button">详情</a>
                         &nbsp; &nbsp; &nbsp; &nbsp;
                         <a href="./subject/{{data_movies_6[key][0].id }}" class="btn btn-default" role="button">
@@ -116,18 +130,23 @@
                     </span>
                         </a>
                     </p>
+
                 </div>
             </div>
         </div>
 
-        <div class="col-sm-4 col-md-2">
-            <div class="thumbnail">
+        <div class="col-sm-4 col-md-2" >
+            <div class="thumbnail" style="height:330px;">
                 <a href="./subject/{{data_movies_6[key][1].id }}">
-                    <img src="{{data_movies_6[key][1]['img_url']}}" class="img-responsive" alt="Responsive image">
+                    <img src="{{data_movies_6[key][1]['img_url']}}" class="img-responsive" alt="Responsive image" style="height:233px;">
                 </a>
-                <div class="caption">
-                    <h4>{{ data_movies_6[key][1].name | truncate(10, True)}}</h4>
-                    <p><a href="./subject/{{data_movies_6[key][1].id }}" class="btn btn-primary" role="button">详情</a>
+
+                <div class="caption" >
+
+                    <h4 class = "single-row">{{ data_movies_6[key][1].name | make_name_to_one }}</h4>
+
+                    <p>
+                        <a href="./subject/{{data_movies_6[key][1].id }}" class="btn btn-primary" role="button">详情</a>
                         &nbsp; &nbsp; &nbsp; &nbsp;
                         <a href="./subject/{{data_movies_6[key][1].id }}" class="btn btn-default" role="button">
                     <span class="glyphicon glyphicon-search" aria-hidden="true">
@@ -135,16 +154,17 @@
                         </a>
                     </p>
                 </div>
+
             </div>
         </div>
 
-        <div class="col-sm-4 col-md-2">
-            <div class="thumbnail">
+        <div class="col-sm-4 col-md-2" >
+            <div class="thumbnail" style="height:330px;">
                 <a href="./subject/{{data_movies_6[key][2].id }}">
-                    <img src="{{data_movies_6[key][2]['img_url']}}" class="img-responsive" alt="Responsive image">
+                    <img src="{{data_movies_6[key][2]['img_url']}}" class="img-responsive" alt="Responsive image" style="height:233px;">
                 </a>
                 <div class="caption">
-                    <h4>{{ data_movies_6[key][2].name | truncate(10, True)}}</h4>
+                    <h4 class=" single-row">{{ data_movies_6[key][2].name | make_name_to_one }}</h4>
                     <p><a href="./subject/{{data_movies_6[key][2].id }}" class="btn btn-primary" role="button">详情</a>
                         &nbsp; &nbsp; &nbsp; &nbsp;
                         <a href="./subject/{{data_movies_6[key][2].id }}" class="btn btn-default" role="button">
@@ -156,13 +176,13 @@
             </div>
         </div>
 
-        <div class="col-sm-4 col-md-2">
-            <div class="thumbnail">
+        <div class="col-sm-4 col-md-2" >
+            <div class="thumbnail" style="height:330px;">
                 <a href="./subject/{{data_movies_6[key][3].id }}">
-                    <img src="{{data_movies_6[key][3]['img_url']}}" class="img-responsive" alt="Responsive image">
+                    <img src="{{data_movies_6[key][3]['img_url']}}" class="img-responsive" alt="Responsive image" style="height:233px;">
                 </a>
                 <div class="caption">
-                    <h4>{{ data_movies_6[key][3].name | truncate(10, True)}}</h4>
+                    <h4 class = "single-row">{{ data_movies_6[key][3].name | make_name_to_one }}</h4>
                     <p><a href="./subject/{{data_movies_6[key][3].id }}" class="btn btn-primary" role="button">详情</a>
                         &nbsp; &nbsp; &nbsp; &nbsp;
                         <a href="./subject/{{data_movies_6[key][3].id }}" class="btn btn-default" role="button">
@@ -174,13 +194,13 @@
             </div>
         </div>
 
-        <div class="col-sm-4 col-md-2">
-            <div class="thumbnail">
+        <div class="col-sm-4 col-md-2" >
+            <div class="thumbnail" style="height:330px;">
                 <a href="./subject/{{data_movies_6[key][4].id }}">
-                    <img src="{{data_movies_6[key][4]['img_url']}}" class="img-responsive" alt="Responsive image">
+                    <img src="{{data_movies_6[key][4]['img_url']}}" class="img-responsive" alt="Responsive image" style="height:233px;">
                 </a>
                 <div class="caption">
-                    <h4>{{ data_movies_6[key][4].name | truncate(10, True)}}</h4>
+                    <h4 class = "single-row">{{ data_movies_6[key][4].name | make_name_to_one }}</h4>
                     <p><a href="./subject/{{data_movies_6[key][4].id }}" class="btn btn-primary" role="button">详情</a>
                         &nbsp; &nbsp; &nbsp; &nbsp;
                         <a href="./subject/{{data_movies_6[key][4].id }}" class="btn btn-default" role="button">
@@ -192,13 +212,14 @@
             </div>
         </div>
 
-        <div class="col-sm-4 col-md-2">
-            <div class="thumbnail">
+        <div class="col-sm-4 col-md-2" >
+            <div class="thumbnail" style="height:330px;">
                 <a href="./subject/{{data_movies_6[key][5].id }}">
-                    <img src="{{data_movies_6[key][5]['img_url']}}" class="img-responsive" alt="Responsive image">
+                    <img src="{{data_movies_6[key][5]['img_url']}}" class="img-responsive" alt="Responsive image" style="height:233px;">
                 </a>
                 <div class="caption">
-                    <h4>{{ data_movies_6[key][5].name | truncate(10, True)}}</h4>
+                    <h4 class = "single-row">{{ data_movies_6[key][5].name | make_name_to_one }}</h4>
+                    <div >
                     <p><a href="./subject/{{data_movies_6[key][5].id }}" class="btn btn-primary" role="button">详情</a>
                         &nbsp; &nbsp; &nbsp; &nbsp;
                         <a href="./subject/{{data_movies_6[key][5].id }}" class="btn btn-default" role="button">
@@ -206,6 +227,7 @@
                     </span>
                         </a>
                     </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -254,7 +276,7 @@
     <hr/>
     <div class="row footer-bottom">
         <div class="container">
-            <p class="text-center">Copyright &copy; 2017 balnk guo.</p>
+            <p class="text-center">Copyright &copy; 2017 blank guo.</p>
             <p class="text-right"><a href="#top">回到顶部</a></p>
 
         </div>

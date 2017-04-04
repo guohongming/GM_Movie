@@ -29,4 +29,14 @@ class LoginForm(Form):
             return False
 
         is_pass = db.check_pass(self.username.data, self.password.data)
+        if not is_pass:
+            self.username.errors.append('Invalid username or password')
+            return False
 
+        return True
+
+
+
+
+if __name__ == '__main__':
+    f = LoginForm()
