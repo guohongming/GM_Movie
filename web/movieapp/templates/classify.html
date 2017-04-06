@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>搜索结果</title>
+    <title>{{ the_tag }}</title>
     <link rel="shortcut icon" href="{{url_for('static',filename = 'image/logo.ico')}}" type="image/x-icon">
     <link rel="icon" href="{{url_for('static',filename = 'image/logo.ico')}}" type="image/x-icon">
     <!-- Bootstrap -->
@@ -41,12 +41,12 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li ><a href="/">首页 <span class="sr-only">(current)</span></a></li>
+                <li ><a href="/"><span class="glyphicon glyphicon-home ">&nbsp;首页 <span class="sr-only">(current)</span></a></li>
                 <li><a href="#">电影</a></li>
                 <li class="dropdown active">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">分类 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                         <li><a href="/tag/爱情?skip=0&limit=10">爱情 Love</a></li>
+                        <li><a href="/tag/爱情?skip=0&limit=10">爱情 Love</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="/tag/喜剧?skip=0&limit=10">喜剧 Comedy</a></li>
                         <li role="separator" class="divider"></li>
@@ -72,16 +72,23 @@
                     </ul>
                 </li>
             </ul>
-            <form class="navbar-form navbar-left" method="post" action="/search">
+           <form class="navbar-form navbar-left" method="post" action="/search">
                 <div class="form-group">
                     <input id = "data" name ="data" type="text" class="form-control" placeholder="Search">
                 </div>
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
-           <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">登录</a></li>
+           {% if current_user.is_authenticated %}
+                <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">您好！ {{ current_user.user_name }}</a></li>
+                <li><a href="/logout">退出</a></li>
+                </ul>
+            {% else %}
+                 <ul class="nav navbar-nav navbar-right">
+                <li><a href="/login">登录</a></li>
                 <li><a href="#">注册</a></li>
             </ul>
+            {% endif %}!
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
@@ -94,18 +101,14 @@
 
 <div class="container">
 
-    <div>
-        <h4>搜索关键词：{{ key }} 结果如下</h4>
-
-    </div>
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title">{{ key }}</h3>
+            <h3 class="panel-title">{{ the_tag }}</h3>
         </div>
         <div class="panel-body ">
             <ul class="list-group">
 
-                {% for item in search_data %}
+                {% for item in classify_data %}
                 <li class="list-group-item list-group-item-success">
                     <div class="row">
                         <div class="col-sm-2 col-md-1">
@@ -115,9 +118,11 @@
                         </div>
 
                         <span class="label label-info">主演</span>：
-                    <span >
+                    <span>
                         {{ item.stars | join('、') | truncate(75)}}
                     </span>
+                        <br>
+                        <br>
                         <br>
                         <span class="label label-warning">评分</span>：
                     <span>
@@ -145,7 +150,24 @@
 <nav aria-label="Page navigation">
     <ul class="pagination">
         <li>
-           显示前20条！！
+            <a href="./{{ the_tag }}?skip={{ Previous }}&limit={{ the_limit }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li><a href="">1</a></li>
+        <li><a href="./{{ the_tag }}?skip=10&limit={{ the_limit }}">2</a></li>
+        <li><a href="./{{ the_tag }}?skip=20&limit={{ the_limit }}">3</a></li>
+        <li><a href="./{{ the_tag }}?skip=30&limit={{ the_limit }}">4</a></li>
+        <li><a href="./{{ the_tag }}?skip=40&limit={{ the_limit }}">5</a></li>
+        <li><a href="./{{ the_tag }}?skip=50&limit={{ the_limit }}">6</a></li>
+        <li><a href="./{{ the_tag }}?skip=60&limit={{ the_limit }}">7</a></li>
+        <li><a href="./{{ the_tag }}?skip=70&limit={{ the_limit }}">8</a></li>
+        <li><a href="./{{ the_tag }}?skip=80&limit={{ the_limit }}">9</a></li>
+        <li><a href="./{{ the_tag }}?skip=90&limit={{ the_limit }}">10</a></li>
+        <li>
+            <a href="./{{ the_tag }}?skip={{ next }}&limit={{ the_limit }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
         </li>
     </ul>
 </nav>
