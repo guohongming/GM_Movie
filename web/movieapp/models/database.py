@@ -13,17 +13,17 @@ class DataBase(object):
     # 获取首页所需要的数据： 分类下的6个电影信息
     def get_index_data(self):
 
-        info6s_from_db_love = self.movie_db.movieinfo.find({'types' :{'$regex':'爱情'}}).skip(0).limit(6)
-        info6s_from_db_comedy = self.movie_db.movieinfo.find({'types' :{'$regex':'喜剧'}}).skip(0).limit(6)
-        info6s_from_db_plot = self.movie_db.movieinfo.find({'types' :{'$regex':'剧情'}}).skip(6).limit(6)
-        info6s_from_db_animation = self.movie_db.movieinfo.find({'types' :{'$regex':'动画'}}).skip(12).limit(6)
-        info6s_from_db_science = self.movie_db.movieinfo.find({'types' :{'$regex':'科幻'}}).skip(18).limit(6)
-        info6s_from_db_action = self.movie_db.movieinfo.find({'types' :{'$regex':'动作'}}).skip(24).limit(6)
-        info6s_from_db_classic = self.movie_db.movieinfo.find({'types' :{'$regex':'爱情'}}).skip(30).limit(6)
-        info6s_from_db_suspence = self.movie_db.movieinfo.find({'types' :{'$regex':'悬疑'}}).skip(36).limit(6)
-        info6s_from_db_youth= self.movie_db.movieinfo.find({'types' :{'$regex':'爱情'}}).skip(42).limit(6)
-        info6s_from_db_thriller = self.movie_db.movieinfo.find({'types' :{'$regex':'惊悚'}}).skip(48).limit(6)
-        info6s_from_db_moving = self.movie_db.movieinfo.find({'types' :{'$regex':'爱情'}}).skip(0).limit(6)
+        info6s_from_db_love = self.movie_db.movieinfo.find({'types': {'$regex': '爱情'}}).skip(0).limit(6)
+        info6s_from_db_comedy = self.movie_db.movieinfo.find({'types': {'$regex': '喜剧'}}).skip(0).limit(6)
+        info6s_from_db_plot = self.movie_db.movieinfo.find({'types': {'$regex': '剧情'}}).skip(6).limit(6)
+        info6s_from_db_animation = self.movie_db.movieinfo.find({'types': {'$regex': '动画'}}).skip(12).limit(6)
+        info6s_from_db_science = self.movie_db.movieinfo.find({'types': {'$regex': '科幻'}}).skip(18).limit(6)
+        info6s_from_db_action = self.movie_db.movieinfo.find({'types': {'$regex': '动作'}}).skip(24).limit(6)
+        info6s_from_db_classic = self.movie_db.movieinfo.find({'types': {'$regex': '爱情'}}).skip(30).limit(6)
+        info6s_from_db_suspence = self.movie_db.movieinfo.find({'types': {'$regex': '悬疑'}}).skip(36).limit(6)
+        info6s_from_db_youth= self.movie_db.movieinfo.find({'types': {'$regex': '爱情'}}).skip(42).limit(6)
+        info6s_from_db_thriller = self.movie_db.movieinfo.find({'types': {'$regex': '惊悚'}}).skip(48).limit(6)
+        info6s_from_db_moving = self.movie_db.movieinfo.find({'types': {'$regex': '爱情'}}).skip(0).limit(6)
 
         data = {}
 

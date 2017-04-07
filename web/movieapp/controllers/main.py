@@ -9,9 +9,9 @@ from flask import (render_template,
                    flash,
                    session)
 
-from movieapp.models.forms import LoginForm
-from movieapp.models.models import User
-from flask_login import login_user, logout_user, current_user
+from movieapp.models.forms import LoginForm, RegisterForm
+from movieapp.models.models import User, db_user
+from flask_login import login_user, logout_user, current_user, login_required
 
 main_blueprint = Blueprint(
     'main',
@@ -32,14 +32,30 @@ def login():
         flash("you have been logged in !", category="success")
         # print('success')
         return redirect(url_for('movie.index'))
-    print(form.errors)
+    # print(form.errors)
 
     return render_template('login.html', form=form)
 
 
 @main_blueprint.route('/logout', methods=['GET', 'POST'])
+@login_required
 def logout():
     logout_user()
     flash('You have been logged out.')
     return redirect(url_for('movie.index'))
 
+
+@main_blueprint.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegisterForm()
+    if form.validate_on_submit():
+        new_user = User(form.username.data)
+        new_user.set_password(form.password.data)
+
+        db_user.session.add(new_user)
+        db_user.session.commit()
+        flash("Your user has been created, please login.", category="success")
+
+        return redirect(url_for('.login'))
+
+    return render_template('register.html', form=form)
