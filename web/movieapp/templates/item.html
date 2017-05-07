@@ -33,7 +33,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="/">谷米电影</a>
+            <a class="navbar-brand" style="color:cornflowerblue;" href="/">谷米电影</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -83,14 +83,15 @@
  {% if current_user.is_authenticated %}
                 <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">您好！ {{ current_user.user_name }}</a></li>
+                <li><a href="/self">私人推荐</a></li>
                 <li><a href="/logout">退出</a></li>
                 </ul>
             {% else %}
                  <ul class="nav navbar-nav navbar-right">
                 <li><a href="/login">登录</a></li>
-                <li><a href="#">注册</a></li>
+                <li><a href="/register">注册</a></li>
             </ul>
-            {% endif %}!
+            {% endif %}
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
@@ -131,7 +132,7 @@
                     <br>
 
                     <span class="label label-info" >主演</span>
-                   {{ item.stars | join('、') |truncate(48) }}
+                   {{ item.stars | join(' ') |truncate(48) }}
 
                     <br>
                     <br>
@@ -191,10 +192,19 @@
         </div>
 
         <button type="button" class="btn btn-info" ><a href="https://movie.douban.com/subject/{{ item.id }}/" target="_blank">豆瓣链接</a></button>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <button type="button" class="btn btn-info"><a href="{{ item.imdb_url }}" target="_blank">IMDB链接</a></button>
-        </p>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span  class="btn btn-default" role="button" style="background: transparent;">
+                   {% if item.id  in likemovies %}
 
+                    <span class="glyphicon glyphicon-heart" aria-hidden="true" data-class="{{item.id }}">
+                    </span>
+                            {% else %}
+                            <span class="glyphicon glyphicon-heart-empty" aria-hidden="true" data-class="{{item.id }}">
+                    </span>
+                            {% endif %}
+                        </span>
 
 
     </div>
@@ -212,5 +222,54 @@
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{{ url_for('static',filename = 'js/bootstrap.min.js') }}"></script>
+<script type=text/javascript>
+var $SCRIPT_ROOT = {{request.script_root|tojson|safe}};
+</script>
+<script type="text/javascript" >
+
+
+
+    $(function(){
+
+        $(".btn-default").click(function() {
+
+            var like_cion = $(this).find(".glyphicon");
+            var movie_id= like_cion.attr("data-class");
+            if (like_cion.hasClass("glyphicon-heart-empty")) {
+                $.getJSON($SCRIPT_ROOT + '/like',
+                        {
+                            flag: 1,
+                            movieid:movie_id
+
+                        },
+                        function (data) {
+                           like_cion.removeClass("glyphicon-heart-empty").addClass("glyphicon-heart");
+                        }
+                );
+
+
+            }
+
+            else{
+                 $.getJSON($SCRIPT_ROOT + '/like',
+                        {
+                            flag: 0,
+                            movieid:movie_id
+                        },
+                        function (data) {
+                            like_cion.removeClass("glyphicon-heart").addClass("glyphicon-heart-empty");
+                        }
+                );
+
+
+            }
+
+
+        });
+    });
+</script>
+
+
+
   </body>
 </html>

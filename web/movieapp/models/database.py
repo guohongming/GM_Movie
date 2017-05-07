@@ -1,7 +1,7 @@
 __author__ = 'Guo'
 
 import pymongo
-
+import random
 
 class DataBase(object):
 
@@ -11,6 +11,10 @@ class DataBase(object):
         self.movie_db = self.client.movie
 
     # 获取首页所需要的数据： 分类下的6个电影信息
+
+    def write_movie_relation(self, data):
+        self.movie_db.movierelation.insert_one(data)
+
     def get_index_data(self):
 
         info6s_from_db_love = self.movie_db.movieinfo.find({'types': {'$regex': '爱情'}}).skip(0).limit(6)
@@ -84,6 +88,87 @@ class DataBase(object):
         else:
             return False
 
+    def get_self_movies(self,id):
+        user_info = self.movie_db.userinfo.find_one({'id':int(id)})
+        # print(user_info)
+        ids = user_info['recommend_movies']
+        # print(ids)
+        movies = []
+        for id_a in ids:
+            movie_a = self.movie_db.movieinfo.find_one({'id':id_a})
+            movies.append(movie_a)
+        return movies
+
+    def get_random_movies(self):
+        num = random.choice(range(0, 1990))
+        info = self.movie_db.movieinfo.find().skip(num).limit(6)
+        return info
+
+
+    def get_userid(self):
+        users = self.movie_db.userinfo.find()
+        ids=[]
+        for user in users:
+            ids.append(user['id'])
+        return ids
+
+    def add_likemovie_to_userid(self,user_id,movie_id):
+        user = self.movie_db.userinfo.find_one({'id': int(user_id)})
+        likemovies = list(user['like_movies'])
+        likemovies.insert(0,movie_id)
+        self.movie_db.userinfo.update({"id": int(user_id)},{"$set":{"like_movies":likemovies}})
+        return 1
+
+
+    def remove_likemovie_from_userid(self,user_id,movie_id):
+        user = self.movie_db.userinfo.find_one({'id': int(user_id)})
+        likemovies = list(user['like_movies'])
+        likemovies.remove(movie_id)
+        self.movie_db.userinfo.update({"id":int(user_id)},{"$set":{"like_movies":likemovies}})
+        return 1
+
+    def get_likes_from_id(self,id):
+        user = self.movie_db.userinfo.find_one({'id': int(id)})
+        likes = user['like_movies']
+        return likes
+
+    def from_user_like_to_recommend(self,id):
+        user = self.movie_db.userinfo.find_one({'id': int(id)})
+        likemovies = user['like_movies']
+        if len(likemovies)==0:
+            movie_recom = []
+        if len(likemovies)==1:
+            movie0 = self.movie_db.movierelation.find_one({'id':likemovies[0]})
+            movie_recom0 = movie0['relation'][1:13]
+            movie_recom = movie_recom0
+        if len(likemovies)==2:
+            movie0 = self.movie_db.movierelation.find_one({'id':likemovies[0]})
+            movie_recom0 = movie0['relation'][1:7]
+            movie0 = self.movie_db.movierelation.find_one({'id':likemovies[1]})
+            movie_recom1 = movie0['relation'][1:7]
+            movie_recom = movie_recom0+movie_recom1
+        if len(likemovies)==3:
+            movie0 = self.movie_db.movierelation.find_one({'id':likemovies[0]})
+            movie_recom0 = movie0['relation'][1:5]
+            movie0 = self.movie_db.movierelation.find_one({'id':likemovies[1]})
+            movie_recom1 = movie0['relation'][1:5]
+            movie0 = self.movie_db.movierelation.find_one({'id':likemovies[2]})
+            movie_recom2 = movie0['relation'][1:5]
+            movie_recom = movie_recom0+movie_recom1+movie_recom2
+
+        if len(likemovies)>3:
+            movie0 = self.movie_db.movierelation.find_one({'id':likemovies[0]})
+            movie_recom0 = movie0['relation'][1:4]
+            movie0 = self.movie_db.movierelation.find_one({'id':likemovies[1]})
+            movie_recom1 = movie0['relation'][1:4]
+            movie0 = self.movie_db.movierelation.find_one({'id':likemovies[2]})
+            movie_recom2 = movie0['relation'][1:4]
+            movie0 = self.movie_db.movierelation.find_one({'id':likemovies[3]})
+            movie_recom3 = movie0['relation'][1:4]
+            movie_recom = movie_recom0+movie_recom1+movie_recom2+movie_recom3
+        self.movie_db.userinfo.update({"id":id},{"$set":{"recommend_movies":movie_recom}})
+
+        return 1
 
     def test(self):
 
@@ -94,4 +179,7 @@ class DataBase(object):
 if __name__ == '__main__':
     db = DataBase()
     # db.test()
-    print(db.find_user_name('guo'))
+    # print(db.find_user_name('guo'))
+    print(db.from_user_like_to_recommend(1))
+
+

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>{{ the_tag }}</title>
+    <title>{{ the_tag }}{{ the_skip }}</title>
     <link rel="shortcut icon" href="{{url_for('static',filename = 'image/logo.ico')}}" type="image/x-icon">
     <link rel="icon" href="{{url_for('static',filename = 'image/logo.ico')}}" type="image/x-icon">
     <!-- Bootstrap -->
@@ -33,7 +33,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="/">谷米电影</a>
+            <a class="navbar-brand" style="color:cornflowerblue;" href="/">谷米电影</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -81,14 +81,15 @@
            {% if current_user.is_authenticated %}
                 <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">您好！ {{ current_user.user_name }}</a></li>
+                <li><a href="/self">私人推荐</a></li>
                 <li><a href="/logout">退出</a></li>
                 </ul>
             {% else %}
                  <ul class="nav navbar-nav navbar-right">
                 <li><a href="/login">登录</a></li>
-                <li><a href="#">注册</a></li>
+                <li><a href="/register">注册</a></li>
             </ul>
-            {% endif %}!
+            {% endif %}
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
@@ -119,11 +120,23 @@
 
                         <span class="label label-info">主演</span>：
                     <span>
-                        {{ item.stars | join('、') | truncate(75)}}
+                        {{ item.stars | join(" ，") | truncate(75)}}
                     </span>
                         <br>
                         <br>
                         <br>
+
+                         <span  class="btn btn-default" role="button" style="background: transparent;">
+                   {% if item.id  in likemovies %}
+
+                    <span class="glyphicon glyphicon-heart" aria-hidden="true" data-class="{{item.id }}">
+                    </span>
+                            {% else %}
+                            <span class="glyphicon glyphicon-heart-empty" aria-hidden="true" data-class="{{item.id }}">
+                    </span>
+                            {% endif %}
+                        </span>
+                    &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;
                         <span class="label label-warning">评分</span>：
                     <span>
                         {{ item.score }}
@@ -154,16 +167,56 @@
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
-        <li><a href="">1</a></li>
+    {% if the_skip == "0" %}
+        <li class="active"><a href="./{{ the_tag }}?skip=0&limit={{ the_limit }}">1</a></li>
+        {% else %}
+        <li><a href="./{{ the_tag }}?skip=0&limit={{ the_limit }}">1</a></li>
+        {% endif %}
+    {% if the_skip == "10" %}
+        <li class="active"><a href="./{{ the_tag }}?skip=10&limit={{ the_limit }}">2</a></li>
+        {% else %}
         <li><a href="./{{ the_tag }}?skip=10&limit={{ the_limit }}">2</a></li>
+        {% endif %}
+    {% if the_skip == "20" %}
+        <li class="active"><a href="./{{ the_tag }}?skip=20&limit={{ the_limit }}">3</a></li>
+        {% else %}
         <li><a href="./{{ the_tag }}?skip=20&limit={{ the_limit }}">3</a></li>
+        {% endif %}
+    {% if the_skip == "30" %}
+        <li class="active"><a href="./{{ the_tag }}?skip=30&limit={{ the_limit }}">4</a></li>
+        {% else %}
         <li><a href="./{{ the_tag }}?skip=30&limit={{ the_limit }}">4</a></li>
+        {% endif %}
+    {% if the_skip == "40" %}
+        <li class="active"><a href="./{{ the_tag }}?skip=40&limit={{ the_limit }}">5</a></li>
+        {% else %}
         <li><a href="./{{ the_tag }}?skip=40&limit={{ the_limit }}">5</a></li>
+        {% endif %}
+    {% if the_skip == "50" %}
+        <li class="active"><a href="./{{ the_tag }}?skip=50&limit={{ the_limit }}">6</a></li>
+        {% else %}
         <li><a href="./{{ the_tag }}?skip=50&limit={{ the_limit }}">6</a></li>
+        {% endif %}
+    {% if the_skip == "60" %}
+        <li class="active"><a href="./{{ the_tag }}?skip=60&limit={{ the_limit }}">7</a></li>
+        {% else %}
         <li><a href="./{{ the_tag }}?skip=60&limit={{ the_limit }}">7</a></li>
+        {% endif %}
+    {% if the_skip == "70" %}
+        <li class="active"><a href="./{{ the_tag }}?skip=70&limit={{ the_limit }}">8</a></li>
+        {% else %}
         <li><a href="./{{ the_tag }}?skip=70&limit={{ the_limit }}">8</a></li>
+        {% endif %}
+    {% if the_skip == "80" %}
+        <li class="active"><a href="./{{ the_tag }}?skip=80&limit={{ the_limit }}">9</a></li>
+        {% else %}
         <li><a href="./{{ the_tag }}?skip=80&limit={{ the_limit }}">9</a></li>
+        {% endif %}
+    {% if the_skip == "90" %}
+        <li class="active"><a href="./{{ the_tag }}?skip=90&limit={{ the_limit }}">10</a></li>
+        {% else %}
         <li><a href="./{{ the_tag }}?skip=90&limit={{ the_limit }}">10</a></li>
+        {% endif %}
         <li>
             <a href="./{{ the_tag }}?skip={{ next }}&limit={{ the_limit }}" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
@@ -187,5 +240,51 @@
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{{ url_for('static',filename = 'js/bootstrap.min.js') }}"></script>
+<script type=text/javascript>
+var $SCRIPT_ROOT = {{request.script_root|tojson|safe}};
+</script>
+<script type="text/javascript" >
+
+
+
+    $(function(){
+
+        $(".btn-default").click(function() {
+
+            var like_cion = $(this).find(".glyphicon");
+            var movie_id= like_cion.attr("data-class");
+            if (like_cion.hasClass("glyphicon-heart-empty")) {
+                $.getJSON($SCRIPT_ROOT + '/like',
+                        {
+                            flag: 1,
+                            movieid:movie_id
+
+                        },
+                        function (data) {
+                           like_cion.removeClass("glyphicon-heart-empty").addClass("glyphicon-heart");
+                        }
+                );
+
+
+            }
+
+            else{
+                 $.getJSON($SCRIPT_ROOT + '/like',
+                        {
+                            flag: 0,
+                            movieid:movie_id
+                        },
+                        function (data) {
+                            like_cion.removeClass("glyphicon-heart").addClass("glyphicon-heart-empty");
+                        }
+                );
+
+
+            }
+
+
+        });
+    });
+</script>
 </body>
 </html>

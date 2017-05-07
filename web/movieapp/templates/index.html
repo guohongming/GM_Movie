@@ -46,7 +46,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="/">谷米电影</a>
+            <a class="navbar-brand" style="color:cornflowerblue;" href="/">谷米电影</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -97,6 +97,7 @@
             {% if current_user.is_authenticated %}
                 <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">您好！ {{ current_user.user_name }}</a></li>
+                <li><a href="/self">私人推荐</a></li>
                 <li><a href="/logout">退出</a></li>
                 </ul>
             {% else %}
@@ -104,7 +105,7 @@
                 <li><a href="/login">登录</a></li>
                 <li><a href="/register">注册</a></li>
             </ul>
-            {% endif %}!
+            {% endif %}
 
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -133,10 +134,16 @@
                     <h4 class = "single-row">{{ data_movies_6[key][0].name | make_name_to_one }}</h4>
                     <p><a href="./subject/{{data_movies_6[key][0].id }}" class="btn btn-primary" role="button">详情</a>
                         &nbsp; &nbsp; &nbsp; &nbsp;
-                        <a href="./subject/{{data_movies_6[key][0].id }}" class="btn btn-default" role="button">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true">
+                        <span  class="btn btn-default" role="button">
+                            {% if data_movies_6[key][0].id in likemovies %}
+
+                    <span class="glyphicon glyphicon-heart" aria-hidden="true" data-class="{{data_movies_6[key][0].id }}">
                     </span>
-                        </a>
+                            {% else %}
+                            <span class="glyphicon glyphicon-heart-empty" aria-hidden="true" data-class="{{data_movies_6[key][0].id }}">
+                    </span>
+                            {% endif %}
+                        </span>
                     </p>
 
                 </div>
@@ -156,10 +163,16 @@
                     <p>
                         <a href="./subject/{{data_movies_6[key][1].id }}" class="btn btn-primary" role="button">详情</a>
                         &nbsp; &nbsp; &nbsp; &nbsp;
-                        <a href="./subject/{{data_movies_6[key][1].id }}" class="btn btn-default" role="button">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true">
+                        <span  class="btn btn-default" role="button">
+                    {% if data_movies_6[key][1].id in likemovies %}
+
+                    <span class="glyphicon glyphicon-heart" aria-hidden="true" data-class="{{data_movies_6[key][1].id }}">
                     </span>
-                        </a>
+                            {% else %}
+                            <span class="glyphicon glyphicon-heart-empty" aria-hidden="true" data-class="{{data_movies_6[key][1].id }}">
+                    </span>
+                            {% endif %}
+                        </span>
                     </p>
                 </div>
 
@@ -175,10 +188,16 @@
                     <h4 class=" single-row">{{ data_movies_6[key][2].name | make_name_to_one }}</h4>
                     <p><a href="./subject/{{data_movies_6[key][2].id }}" class="btn btn-primary" role="button">详情</a>
                         &nbsp; &nbsp; &nbsp; &nbsp;
-                        <a href="./subject/{{data_movies_6[key][2].id }}" class="btn btn-default" role="button">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true">
+                         <span  class="btn btn-default" role="button">
+                   {% if data_movies_6[key][2].id in likemovies %}
+
+                    <span class="glyphicon glyphicon-heart" aria-hidden="true" data-class="{{data_movies_6[key][2].id }}">
                     </span>
-                        </a>
+                            {% else %}
+                            <span class="glyphicon glyphicon-heart-empty" aria-hidden="true" data-class="{{data_movies_6[key][2].id }}">
+                    </span>
+                            {% endif %}
+                        </span>
                     </p>
                 </div>
             </div>
@@ -193,10 +212,16 @@
                     <h4 class = "single-row">{{ data_movies_6[key][3].name | make_name_to_one }}</h4>
                     <p><a href="./subject/{{data_movies_6[key][3].id }}" class="btn btn-primary" role="button">详情</a>
                         &nbsp; &nbsp; &nbsp; &nbsp;
-                        <a href="./subject/{{data_movies_6[key][3].id }}" class="btn btn-default" role="button">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true">
+                         <span  class="btn btn-default" role="button">
+                   {% if data_movies_6[key][3].id in likemovies %}
+
+                    <span class="glyphicon glyphicon-heart" aria-hidden="true" data-class="{{data_movies_6[key][3].id }}">
                     </span>
-                        </a>
+                            {% else %}
+                            <span class="glyphicon glyphicon-heart-empty" aria-hidden="true" data-class="{{data_movies_6[key][3].id }}">
+                    </span>
+                            {% endif %}
+                        </span>
                     </p>
                 </div>
             </div>
@@ -211,10 +236,16 @@
                     <h4 class = "single-row">{{ data_movies_6[key][4].name | make_name_to_one }}</h4>
                     <p><a href="./subject/{{data_movies_6[key][4].id }}" class="btn btn-primary" role="button">详情</a>
                         &nbsp; &nbsp; &nbsp; &nbsp;
-                        <a href="./subject/{{data_movies_6[key][4].id }}" class="btn btn-default" role="button">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true">
+                         <span  class="btn btn-default" role="button">
+                   {% if data_movies_6[key][4].id in likemovies %}
+
+                    <span class="glyphicon glyphicon-heart" aria-hidden="true" data-class="{{data_movies_6[key][4].id }}">
                     </span>
-                        </a>
+                            {% else %}
+                            <span class="glyphicon glyphicon-heart-empty" aria-hidden="true" data-class="{{data_movies_6[key][4].id }}">
+                    </span>
+                            {% endif %}
+                        </span>
                     </p>
                 </div>
             </div>
@@ -230,10 +261,16 @@
                     <div >
                     <p><a href="./subject/{{data_movies_6[key][5].id }}" class="btn btn-primary" role="button">详情</a>
                         &nbsp; &nbsp; &nbsp; &nbsp;
-                        <a href="./subject/{{data_movies_6[key][5].id }}" class="btn btn-default" role="button">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true">
+                         <span  class="btn btn-default" role="button">
+                    {% if data_movies_6[key][5].id in likemovies %}
+
+                    <span class="glyphicon glyphicon-heart" aria-hidden="true" data-class="{{data_movies_6[key][5].id }}">
                     </span>
-                        </a>
+                            {% else %}
+                            <span class="glyphicon glyphicon-heart-empty" aria-hidden="true" data-class="{{data_movies_6[key][5].id }}">
+                    </span>
+                            {% endif %}
+                        </span>
                     </p>
                     </div>
                 </div>
@@ -298,5 +335,53 @@
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="static/js/bootstrap.min.js"></script>
+<script type=text/javascript>
+var $SCRIPT_ROOT = {{request.script_root|tojson|safe}};
+</script>
+<script type="text/javascript" >
+
+
+
+    $(function(){
+
+        $(".btn-default").click(function() {
+
+            var like_cion = $(this).find(".glyphicon");
+            var movie_id= like_cion.attr("data-class");
+            if (like_cion.hasClass("glyphicon-heart-empty")) {
+                $.getJSON($SCRIPT_ROOT + '/like',
+                        {
+                            flag: 1,
+                            movieid:movie_id
+
+                        },
+                        function (data) {
+                           like_cion.removeClass("glyphicon-heart-empty").addClass("glyphicon-heart");
+                        }
+                );
+
+
+            }
+
+            else{
+                 $.getJSON($SCRIPT_ROOT + '/like',
+                        {
+                            flag: 0,
+                            movieid:movie_id
+                        },
+                        function (data) {
+                            like_cion.removeClass("glyphicon-heart").addClass("glyphicon-heart-empty");
+                        }
+                );
+
+
+            }
+
+
+        });
+    });
+</script>
+
+
 </body>
 </html>
