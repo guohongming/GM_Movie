@@ -14,11 +14,12 @@ db = database.DataBase()
 
 def train():
     ds = pd.read_csv('test2.csv')
-    print(ds)
-    print(ds['description'])
+    # print(ds)
+    #print(ds['description'])
     tf = TfidfVectorizer(analyzer='word', ngram_range=(1, 3), min_df=0, stop_words='english')
     # print(tf)
     tfidf_matrix = tf.fit_transform(ds['description'])
+
     cosine_similarities = linear_kernel(tfidf_matrix,tfidf_matrix)
 
     for idx, row in ds.iterrows():
